@@ -1154,8 +1154,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
 
   @override
   Widget build(BuildContext context) {
+    var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
     PageController pageController;
-
     int initialPageNumberByCategory(Category category) {
       if (category == Category.RECOMMENDED) {
         return 0;
@@ -1221,10 +1221,12 @@ class _EmojiPickerState extends State<EmojiPicker> {
 
       var children = Category.values.map((categoryValue) {
         return SizedBox(
-          width: MediaQuery.of(context).size.width /
+          width: isPortrait ? MediaQuery.of(context).size.width /
+              (recommendKeywords == null ? 9 : 10) : MediaQuery.of(context).size.width /
               (recommendKeywords == null ? 9 : 10),
-          height: MediaQuery.of(context).size.width /
-              (recommendKeywords == null ? 9 : 10),
+          height: isPortrait? MediaQuery.of(context).size.width /
+              (recommendKeywords == null ? 9 : 11) : MediaQuery.of(context).size.width /
+              (recommendKeywords == null ? 9 : 19.5),
           child: widget.buttonMode == ButtonMode.MATERIAL
               ? FlatButton(
                   padding: EdgeInsets.all(0),
